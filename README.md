@@ -43,11 +43,11 @@ Testing out [openfaas](https://www.openfaas.com/), running your own serverless f
     # Visit http://127.0.0.1:31112 in the browser to view openfaas UI
     echo -n $PASSWORD | faas-cli login --password-stdin
     ```
-- Pull openfaas function templates    
+- Pull openfaas function templates (optional, sample function included in repo)
     ```bash
     faas-cli template pull
     ```
-- Create node function from template
+- Create node function from template (optional, sample function included in repo)
     ```bash
     faas-cli new test-node --lang node12
     ```
