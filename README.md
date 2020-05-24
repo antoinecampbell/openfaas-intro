@@ -3,6 +3,11 @@ Testing out [openfaas](https://www.openfaas.com/), running your own serverless f
 
 ## Setup
 **Note:** Kubernetes should already be setup running Minikube.
+
+- View Kubernetes dashboard
+    ```bash
+    minikube dashboard
+    ```
 - Install Helm
     ```bash
     brew install helm
@@ -41,4 +46,47 @@ Testing out [openfaas](https://www.openfaas.com/), running your own serverless f
 - Pull openfaas function templates    
     ```bash
     faas-cli template pull
+    ```
+- Create node function from template
+    ```bash
+    faas-cli new test-node --lang node12
+    ```
+- If using Minikube, need to switch to the Docker API in the VM
+    ```bash
+    eval $(minikube docker-env)
+    # To disconnect from the Docker API inside the Minikube VM
+    eval $(minikube docker-env -u)
+    ```
+- If using Minikube, enable registry
+    ```bash
+    minikube addons enable registry
+    ```
+- Login to Minikube docker registry
+    ```bash
+    docker login localhost:5000
+    # It should accept any username and password
+    ```
+- Build function
+    ```bash
+    faas-cli build -f test-node.yml
+    ```
+- Push function
+    ```bash
+    faas-cli push -f test-node.yml
+    ```
+- Deploy function
+    ```bash
+    faas-cli deploy -f test-node.yml
+    ```
+- Build, Push, and Deploy the function
+    ```bash
+    faas-cli up -f test-node.yml
+    ```
+- Function logs
+    ```bash
+    faas-cli logs test-node
+    ```
+- Remove function
+    ```bash
+    faas-cli remove -f test-node.yml
     ```
